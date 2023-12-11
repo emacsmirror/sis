@@ -16,3 +16,5 @@
 *.~undo-tree
 
 # End of https://www.gitignore.io/api/elisp
+.aider*
+.env

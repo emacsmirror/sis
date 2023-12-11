@@ -1,6 +1,8 @@
 #+TITLE: README
 [[https://melpa.org/#/sis][file:https://melpa.org/packages/sis-badge.svg]]
 
+[[./README.zh.org][中文版]]
+
 * About
 ~sis~ (smart input source) enables less manual switch for native or OS input
 source (input method):
@@ -134,7 +136,7 @@ emploring external tools. ~sis~ has builtin support for those APIs under the ISM
 type of ~w32~, which is auto detected and configured. So the follow codes are
 not required actually.
 #+BEGIN_SRC lisp
-(sis-ism-lazyman-config nil t 'w32)
+; (sis-ism-lazyman-config nil t 'w32)
 #+END_SRC
 
 *** ~im-select~
@@ -227,6 +229,7 @@ its all in English.
 Tips:
 1. For ~spacemacs~, if it works in the ~hybrid~ mode, some of the ~evil~ related
    features may not work. Change to ~vim~ mode instead.
+2. Make sure your ISM is availabe (in your ~$PATH~) before call ~sis~ command.
 
 **  About /inline english mode/
 
