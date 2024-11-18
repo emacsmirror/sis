@@ -18,7 +18,7 @@ source (input method):
   according to context. It also has a global version ~sis-global-context-mode~
   to enable the mode for all buffers. When to switch input source according to
   context can be configured easily by a variable, whose default value
-  indicates when entering evil insert mode.
+  indicates when entering ~evil~ insert mode.
 - A buffer local mode: ~sis-inline-mode~ to enable the
   automatically triggering of a temporary overlay to input English/other
   language and then back to original input source without switching input
