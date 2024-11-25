@@ -214,14 +214,13 @@ autocomplete rendering a large area with the region background.")
   "Rule to delete head spaces.
 
 Possible values:
-0: don't delete space
+0: don\'t delete space
 1: delete 1 space if exists
-'zero: always ensure no space
-'one: always ensure one space
+\'zero: always ensure no space
+\'one: always ensure one space
 custom function: the cursor will be moved to the beginning of the inline region,
-                   and the function will be called with an argument which is the
-                   end position of the leading whitespaces in the inline region.
-")
+                 and the function will be called with an argument which is the
+                 end position of the leading whitespaces in the inline region.")
 
 (defvar sis-inline-tighten-tail-rule 'one
   "Rule to delete tail spaces.
@@ -317,11 +316,11 @@ meanings as `string-match-p'."
   (unless (and (functionp sis-do-get)
                (functionp sis-do-set))
     (cond
-     ((and (string= (window-system) "mac")
+     ((and (member (window-system) (list 'ns 'mac))
            (fboundp 'mac-input-source))
       ;; EMP
       (setq sis--ism 'emp))
-     ((and (string= (window-system) "w32")
+     ((and (equal (window-system) 'w32)
            (fboundp 'w32-get-ime-open-status))
       ;; w32, input sources are fixed
       (setq sis-english-source nil)
