@@ -250,7 +250,7 @@ english text<spc><RET>中文~ ，无需手动切换输入法。
 | 变量                  | 描述                   | 默认值                 |
 |-----------------------+------------------------+------------------------|
 | ~sis-english-pattern~ | 识别英文字符的模式     | ~[a-zA-Z]~             |
-| ~sis-other-pattern~   | 识别其他语言字符的模式 | ~\cc~，参见 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Regexp-Backslash.html][emacs 手册]] |
+| ~sis-other-pattern~   | 识别其他语言字符的模式 | ~\cC~，参见 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Regexp-Backslash.html][emacs 手册]] |
 | ~sis-blank-pattern~   | 识别空白字符的模式     | ~[:blank:]~            |
 |-----------------------+------------------------+------------------------|
 
