@@ -632,6 +632,9 @@ TYPE: TYPE can be 'native, 'w32, 'emp, 'macism, 'im-select, 'fcitx, 'fcitx5,
 ;;
 ;; Following codes are mainly about cursor color mode
 ;;
+(defun sis--reset-default-cursor-color ()
+    "Reset default cursor color to nil"
+    (setq sis-default-cursor-color nil)
 
 (defun sis--set-cursor-color-advice (color)
   "Advice for FN of `set-cursor-color' with COLOR.
@@ -684,11 +687,13 @@ way."
     ;; auto refresh input source
     (unless (eq sis-external-ism 'native)
       (sis--try-enable-auto-refresh-mode))
+    (advice-add 'enable-theme :after #'sis--reset-default-cursor-color)
     (advice-add 'set-cursor-color :filter-args #'sis--set-cursor-color-advice)
     (add-hook 'sis-change-hook #'sis--update-cursor-color))
    (; turn off the mode
     (not sis-global-cursor-color-mode)
     (sis--try-disable-auto-refresh-mode)
+    (advice-remove 'enable-theme #'sis--reset-default-cursor-color)
     (advice-remove 'set-cursor-color #'sis--set-cursor-color-advice)
     (remove-hook 'sis-change-hook #'sis--update-cursor-color))))
 
