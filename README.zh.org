@@ -4,7 +4,8 @@
 [[./README.org][English Version]]
 
 * 关于
-~sis~ (smart input source) 让原生/操作系统输入源（输入法）的切换更加智能便捷：
+~sis~ (smart input source) 可以最小化在 Emacs 中手动切换输入源（输入法）的需求，
+对原生和操作系统的输入源（输入法）都有效：
 
 - 全局模式： ~sis-global-respect-mode~ 使输入源适应不同的缓冲区/模式
   1. 启动时适应：以指定语言启动 Emacs

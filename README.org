@@ -4,8 +4,8 @@
 [[./README.zh.org][中文版]]
 
 * About
-~sis~ (smart input source) enables less manual switch for native or OS input
-source (input method):
+~sis~ (smart input source) minimize manual switching input source (input method)
+in ~Emacs~, works for both native and OS input source (input method).
 
 - A global mode: ~sis-global-respect-mode~ to respect buffer/mode
   by proper input source
