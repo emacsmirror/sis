@@ -634,7 +634,7 @@ TYPE: TYPE can be 'native, 'w32, 'emp, 'macism, 'im-select, 'fcitx, 'fcitx5,
 ;;
 (defun sis--reset-default-cursor-color ()
     "Reset default cursor color to nil"
-    (setq sis-default-cursor-color nil)
+    (setq sis-default-cursor-color nil))
 
 (defun sis--set-cursor-color-advice (color)
   "Advice for FN of `set-cursor-color' with COLOR.
