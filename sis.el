@@ -1029,7 +1029,8 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
 
 - Respect start: start this mode with specific input source.
 - Respect ~evil~: switch to English when leaving ~evil~ ~insert~ mode.
-- Respect prefix key: switch to English for ~C-c~/ ~C-x~/ ~C-h~.
+- Respect prefix key: switch to English for \\[Control-c] / \\[Control-x] /
+  \\[Control-h].
 - Respect buffer: restore buffer input source when it regain focus."
   :global t
   :init-value nil
@@ -1151,10 +1152,10 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
   )
 
 (defun sis--back-detect-chars ()
-  "Detect char backward by two steps.
+  "Detect char backward by two step.
 
-  First backward skip blank in the current line,
-  then backward skip blank across lines."
+  Step 1: backward skip blank in the current line.
+  Step 2: backward skip blank across lines."
   (save-excursion
     (skip-chars-backward sis-blank-pattern)
     (let ((to (point))
