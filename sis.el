@@ -259,6 +259,7 @@ custom function: the cursor will be moved to the end of the inline region, and
 (declare-function evil-operator-state-p
                   "ext:evil-states.el" (&optional state) t)
 (declare-function company--active-p "ext:company.el" () t)
+(declare-function company-complete-selection "ext:company.el" () t)
 (declare-function mac-input-source "ext:macfns.c" (&optional SOURCE FORMAT) t)
 (declare-function mac-select-input-source "ext:macfns.c"
                   (SOURCE &optional SET-KEYBOARD-LAYOUT-OVERRIDE-P) t)
