@@ -88,14 +88,13 @@ Each trigger should be a cons cell: (cons FN DETECTOR).
   - args: nil
   - return:
     - nil: left the determination to later detectors.
-    - 'english: english context.
-    - 'other: other language context.
+    - \\='english: english context.
+    - \\='other: other language context.
 
 Example of adding a trigger:
-#+begin_src elisp
-(add-to-list 'sis-respect-minibuffer-triggers
-             (cons 'org-roam-node-find (lambda () 'other)))
-#+end_src
+
+  (add-to-list \\='sis-respect-minibuffer-triggers
+               (cons \\='org-roam-node-find (lambda () \\='other)))
 
 If no trigger returns a none-nil result, english will be used as default.")
 
@@ -128,8 +127,8 @@ Set after the modes may have no effect.")
 
 Possible values:
 nil: dynamic context
-'english: English context
-'other: other language context.")
+\\='english: English context
+\\='other: other language context.")
 
 (defvar sis-context-detectors
   (list (lambda (&rest _) sis-context-fixed)
@@ -148,8 +147,8 @@ Each detector should:
   - fore-detect: which is the result of (sis--fore-detect-chars).
 - return one of the following values:
   - nil: left the determination to later detectors.
-  - 'english: English context.
-  - 'other: other language context.")
+  - \\='english: English context.
+  - \\='other: other language context.")
 
 (defvar sis-context-aggressive-line t
   "Aggressively detect context across blank lines.")
@@ -169,14 +168,14 @@ Each trigger should be a list: (FN PRE-FN-DETECTOR POST-FN-DETECTOR).
   - args: none
   - return:
     - nil: left the determination to later detectors.
-    - 'english: English context.
-    - 'other: other language context.
+    - \\='english: English context.
+    - \\='other: other language context.
 - POST-FN-DETECTOR:
   - args: none
   - return:
     - nil: left the determination to later detectors.
-    - 'english: English context.
-    - 'other: other language context.
+    - \\='english: English context.
+    - \\='other: other language context.
 Input source will be switched to (or (PRE-FN-DETECTOR) (POST-FN-DETECTOR)) after
 FN is invoked.")
 
@@ -214,10 +213,10 @@ autocomplete rendering a large area with the region background.")
   "Rule to delete head spaces.
 
 Possible values:
-0: don\'t delete space
+0: don't delete space
 1: delete 1 space if exists
-\'zero: always ensure no space
-\'one: always ensure one space
+\\='zero: always ensure no space
+\\='one: always ensure one space
 custom function: the cursor will be moved to the beginning of the inline region,
                  and the function will be called with an argument which is the
                  end position of the leading whitespaces in the inline region.")
@@ -228,8 +227,8 @@ custom function: the cursor will be moved to the beginning of the inline region,
 Possible values:
 0: don't delete space
 1: delete 1 space if exists
-'zero: always ensure no space
-'one: always ensure one space
+\\='zero: always ensure no space
+\\='one: always ensure one space
 custom function: the cursor will be moved to the end of the inline region, and
                    the function will be called with an argument which is the
                    beginning of the tailing whitespaces in the inline region.")
@@ -306,7 +305,7 @@ meanings as `string-match-p'."
 
 (defun sis--init-ism ()
   "Init input source manager."
-  ;; `sis-do-get'and `sis-do-set' takes the first precedence.
+  ;; `sis-do-get' and `sis-do-set' takes the first precedence.
 
   ;; external ism
   (when (stringp sis-external-ism)
@@ -412,7 +411,7 @@ meanings as `string-match-p'."
 (defun sis--update-state (source)
   "Update input source state.
 
-SOURCE should be 'english or 'other."
+SOURCE should be \\='english or \\='other."
 
   (setq sis--previous sis--current)
   (setq sis--current source)
@@ -453,37 +452,37 @@ SOURCE should be 'english or 'other."
   (sis--set (or sis--for-buffer 'english)))
 
 (defun sis--set-english ()
-  "Function to set input source to `english'."
+  "Function to set input source to \\='english."
   (sis--set 'english))
 
 (defun sis--set-other ()
-  "Function to set input source to `other'."
+  "Function to set input source to \\='other."
   (sis--set 'other))
 
 ;;;###autoload
 (defun sis-set-english ()
-  "Command to set input source to `english'."
+  "Command to set input source to \\='english."
   (interactive)
   (setq sis--for-buffer-locked nil)
   (sis--set-english))
 
 ;;;###autoload
 (defun sis-set-other ()
-  "Command to set input source to `other'."
+  "Command to set input source to \\='other."
   (interactive)
   (setq sis--for-buffer-locked nil)
   (sis--set-other))
 
 ;;;###autoload
 (defun sis-switch ()
-  "Switch input source between english and other."
+  "Switch input source between \\='english and \\='other."
   (interactive)
   (setq sis--for-buffer-locked nil)
   (cond
-   (; current is english
+   (; current is \\='english
     (eq sis--current 'english)
     (sis--set-other))
-   (; current is other
+   (; current is \\='other
     (eq sis--current 'other)
     (sis--set-english))))
 
@@ -493,11 +492,13 @@ SOURCE should be 'english or 'other."
 
 Run after the modes may have no effect.
 ENGLISH-SOURCE: ENGLISH input source, nil means default,
-                ignored by ISM-TYPE of 'fcitx, 'fcitx5, 'native, 'w32.
+                ignored by ISM-TYPE of \\='fcitx, \\='fcitx5, \\='native,
+                \\='w32.
 OTHER-SOURCE: OTHER language input source, nil means default,
-              ignored by ISM-TYPE of 'fcitx, 'fcitx5, 'w32.
-TYPE: TYPE can be 'native, 'w32, 'emp, 'macism, 'im-select, 'fcitx, 'fcitx5,
-      'ibus. nil TYPE fits both 'emp and 'macism."
+              ignored by ISM-TYPE of \\='fcitx, \\='fcitx5, \\='w32.
+TYPE: TYPE can be \\='native, \\='w32, \\='emp, \\='macism, \\='im-select,
+      \\='fcitx, \\='fcitx5,\\='ibus.
+      nil TYPE fits both \\='emp and \\='macism."
   (when english-source
     (setq sis-english-source english-source))
   (when other-source
@@ -710,7 +711,7 @@ way."
 (defvar sis--prefix-handle-stage 'normal
   "Processing state of the prefix key.
 
-Possible values: 'normal, 'prefix, 'sequence.")
+Possible values: \\='normal, \\='prefix, \\='sequence.")
 
 (defvar sis--buffer-before-prefix nil
   "Current buffer before prefix.")
