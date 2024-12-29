@@ -1,4 +1,4 @@
-;;; sis.el --- Less manual switch for native or OS input source (input method). -*- lexical-binding: t; -*-
+;;; sis.el --- Minimize manual input source (input method) switching -*- lexical-binding: t; -*-
 
 ;; URL: https://github.com/laishulu/emacs-smart-input-source
 ;; Created: March 27th, 2020
@@ -22,8 +22,9 @@
 ;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; This package enables less manual switch for native or OS input source (input
-;; method). For more information see the README in the GitHub repo.
+;; This package Minimize manual input source (input method) switching.
+;;
+;;For more information see the README in the GitHub repo.
 
 ;;; Code:
 (require 'subr-x)
