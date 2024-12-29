@@ -1598,8 +1598,7 @@ START: start position of the inline region."
               (insert-char ?\s))
              (; handled by custom function
               (functionp sis-inline-tighten-head-rule)
-              (funcall sis-inline-tighten-head-rule tighten-fore-to))
-             ))))))
+              (funcall sis-inline-tighten-head-rule tighten-fore-to))))))))
   (delete-overlay sis--inline-overlay)
   (setq sis--inline-overlay nil)
   (pcase sis--inline-lang
