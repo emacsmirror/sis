@@ -1320,13 +1320,12 @@ If POSITION is not provided, then default to be the current position."
         (dolist (hook sis-context-hooks)
           (remove-hook hook #'sis-context nil))))
     (dolist (trigger sis-context-triggers)
-      (let ((trigger-fn (eval (nth 0 trigger)))
-            ;; delete advices with property of 'sis--context-trigger-advice
-            (advice-mapc
-             (lambda (advice _)
-               (when (get (intern advice) 'sis--context-trigger-advice)
-                 (advice-remove trigger-fn advice))
-               trigger-fn))))))))
+      (let ((trigger-fn (eval (nth 0 trigger))))
+        ;; delete advices with property of 'sis--context-trigger-advice
+        (advice-mapc (lambda (advice _)
+                       (when (get (intern advice) 'sis--context-trigger-advice)
+                         (advice-remove trigger-fn advice)))
+                     trigger-fn))))))
 
 ;;;###autoload
 (define-globalized-minor-mode
