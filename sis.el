@@ -1281,6 +1281,7 @@ If POSITION is not provided, then default to be the current position."
 ;;;###autoload
 (define-minor-mode sis-context-mode
   "Switch input source smartly according to context."
+  :global nil
   :init-value nil
   (cond
    (; turn on the mode
@@ -1323,9 +1324,11 @@ If POSITION is not provided, then default to be the current position."
       (let ((trigger-fn (eval (nth 0 trigger))))
         ;; delete advices with property of 'sis--context-trigger-advice
         (advice-mapc (lambda (advice _)
-                       (when (get (intern advice) 'sis--context-trigger-advice)
-                         (advice-remove trigger-fn advice)))
-                     trigger-fn))))))
+                       (when (get advice 'sis--context-trigger-advice)
+                         (advice-remove trigger-fn advice)
+                         (unintern advice nil)))
+                     trigger-fn)))
+    (setq sis--context-triggers-adviced nil))))
 
 ;;;###autoload
 (define-globalized-minor-mode
