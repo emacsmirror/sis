@@ -80,6 +80,11 @@ nil means obtained from the envrionment.")
 (defvar sis-respect-evil-normal-escape t
   "<escape> to english in normal state when the /respect mode/ is enabled.")
 
+(defvar sis-respect-evil-hooks '(evil-insert-state-exit-hook)
+  "List of hook symbols that will be configured to cause input source to go
+to english under /respect mode/. When changing this, one might also want
+to add the corresponding entry hooks to `sis-context-hooks'.")
+
 (defvar sis-respect-minibuffer-triggers (list)
   "Commands trigger to set input source in minibuffer.
 
@@ -159,8 +164,10 @@ Each detector should:
   "Hooks trigger the set of input source following context.")
 
 (defvar sis-context-triggers
-  (list '('+org/insert-item-below 'sis--context-line nil)
-        '('+org/insert-item-above 'sis--context-line nil))
+  (and (featurep 'doom)
+       (modulep! :lang org)
+       (list '('+org/insert-item-below 'sis--context-line nil)
+             '('+org/insert-item-above 'sis--context-line nil)))
   "Commands trigger the set of input source following context.
 
 Each trigger should be a list: (FN PRE-FN-DETECTOR POST-FN-DETECTOR).
@@ -1010,7 +1017,8 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
 (defun sis--respect-evil ()
   "Respect evil."
   (when (featurep 'evil)
-    (add-hook 'evil-insert-state-exit-hook #'sis-set-english)
+    (dolist (hook sis-respect-evil-hooks)
+      (add-hook hook #'sis-set-english))
     ;; evil's advice cause a lot of trouble
     ;; let sis to manage input method
     (advice-add 'evil-activate-input-method :override
@@ -1086,7 +1094,8 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
     (sis--try-disable-auto-refresh-mode)
     ;; for evil
     (when (featurep 'evil)
-      (remove-hook 'evil-insert-state-exit-hook #'sis-set-english)
+      (dolist (hook sis-respect-evil-hooks)
+        (remove-hook hook #'sis-set-english))
       (advice-remove 'evil-activate-input-method #'sis--do-nothing-advice)
       (advice-remove 'evil-deactivate-input-method #'sis--do-nothing-advice)
       (advice-remove 'ad-Advice-toggle-input-method #'sis--original-advice)
