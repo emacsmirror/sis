@@ -97,7 +97,7 @@ brew install emacs-mac --with-modules --with-rsvg --with-imagemagick --with-natu
 *** ~macism~
 If your Emacs is not GUI EMP, the pre-configured ~macism~ should be installed.
 #+BEGIN_SRC bash
-brew tap laishulu/macism
+brew tap laishulu/homebrew
 brew install macism
 #+END_SRC
 Note:
