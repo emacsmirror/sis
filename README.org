@@ -227,9 +227,8 @@ its all in English.
 #+END_SRC
 
 Tips:
-1. For ~spacemacs~ users, if you are using ~hybrid~ mode, you might need to add
-   ~evil-hybrid-state-exit-hook~ to ~sis-respect-evil-hooks~ and
-   ~evil-hybrid-state-entry-hook~ to ~sis-context-hooks~.
+1. For ~spacemacs~, if it works in the ~hybrid~ mode, some of the ~evil~ related
+   features may not work. Change to ~vim~ mode instead.
 2. Make sure your ISM is availabe (in your ~$PATH~) before call ~sis~ command.
 
 **  About /inline english mode/

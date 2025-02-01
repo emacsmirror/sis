@@ -192,9 +192,7 @@ brew install macism
 #+END_SRC
 
 提示：
-1. 对于 ~spacemacs~ 用户，如果你使用 ~hybrid~ 模式，你可能需要将
-   ~evil-hybrid-state-exit-hook~ 添加至 ~sis-respect-evil-hooks~ ，将
-   ~evil-hybrid-state-entry-hook~ 添加至 ~sis-context-hooks~.
+1. 对于 ~spacemacs~，如果在 ~hybrid~ 模式下工作，某些与 ~evil~ 相关的功能可能无法正常工作。请改用 ~vim~ 模式。
 2. 在调用 ~sis~ 命令之前，请确保你的 ISM 可用（在你的 ~$PATH~ 中）。
 
 ** 关于 /内联英文模式/
