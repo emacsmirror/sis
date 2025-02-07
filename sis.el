@@ -48,8 +48,11 @@ Should accept a string which is the id of the input source.")
 (defvar sis-english-source "com.apple.keylayout.US"
   "Input source for english.")
 
-(defvar sis-other-pattern "\\cC"
-  "Pattern to identify a character as other lang.")
+(defvar sis-other-pattern
+  "[\u4E00-\u9FFF\u3400-\u4DBF\u3000-\u303F\uFF00-\uFFEF]"
+  "Pattern to identify a character as other lang.
+
+Default value is CJK characters and punctuations.")
 
 (defvar sis-other-source "com.sogou.inputmethod.sogou.pinyin"
   "Input source for other lang.")

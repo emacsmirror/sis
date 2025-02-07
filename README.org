@@ -285,12 +285,12 @@ Note:
 |-------------------------------------------------+--------------------------------------------------------+------------------------|
 
 ** About language pattern
-| Variable              | Description                                | Default                  |
-|-----------------------+--------------------------------------------+--------------------------|
-| ~sis-english-pattern~ | Pattern to identify a character as English | ~[a-zA-Z]~               |
-| ~sis-other-pattern~   | Pattern to identify a character as other   | ~\cC~ , see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Regexp-Backslash.html][emacs manual]] |
-| ~sis-blank-pattern~   | Pattern to identify a character as blank   | ~[:blank:]~              |
-|-----------------------+--------------------------------------------+--------------------------|
+| Variable              | Description                                | Default                          |
+|-----------------------+--------------------------------------------+----------------------------------|
+| ~sis-english-pattern~ | Pattern to identify a character as English | ~[a-zA-Z]~                       |
+| ~sis-other-pattern~   | Pattern to identify a character as other   | CJK characters and punctuations. |
+| ~sis-blank-pattern~   | Pattern to identify a character as blank   | ~[:blank:]~                      |
+|-----------------------+--------------------------------------------+----------------------------------|
 
 ** About /context mode/
 | Variable                      | Description                                    | Default          |
