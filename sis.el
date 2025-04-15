@@ -1533,7 +1533,8 @@ START: start position of the inline region."
       (sis--evil-not-insert-state-p)
       (sis-set-english))
      (;if cursor is not at the end of the overlay
-      (/= (point) (sis--inline-overlay-end))
+      (and sis-context-mode
+           (/= (point) (sis--inline-overlay-end)))
       (sis-context))
      (; inline english region
       (eq sis--inline-lang 'english)
