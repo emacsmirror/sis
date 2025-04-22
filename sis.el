@@ -1430,7 +1430,6 @@ input source to English."
         (cond
          (;inline english region
           (and sis-inline-with-english
-               (sis--context-other-p back-detect fore-detect (1- (point)))
                (equal sis--for-buffer 'other))
           (sis--inline-activate 'english (1- (point))))
 
