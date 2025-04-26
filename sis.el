@@ -115,8 +115,17 @@ Set after the modes may have no effect.")
 
 Set after the modes may have no effect.")
 
+(defvar sis-respect-temp-english-commands
+  (list 'evil-paste-from-register)
+  "Commands for: {input source} -> english->command->{input source}.
+
+Set after the modes may have no effect.
+It effect is the combination of `sis-respect-go-english-triggers' and
+`sis-respect-restore-triggers':
+{input-source -> english} -> command -> {retore input-source}.")
+
 (defvar sis-prefix-override-keys
-  (list "C-c" "C-x" "C-h" "C-r" "M-SPC")
+  (list "C-c" "C-x" "C-h" "M-SPC")
   "Prefix keys to be overrided.")
 
 (defvar sis-prefix-override-recap-triggers
@@ -759,6 +768,25 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
     (setq sis--respect-go-english nil)
     (setq sis--respect-force-restore t)))
 
+(defun sis--respect-temp-english-advice (fn &rest args)
+  "Advice for FN in `sis-respect-temp-english-commands' with ARGS args."
+  (sis--save-to-buffer)
+  (when sis-log-mode
+    (message "go-english-advice: %s@%s, %s@locked"
+             sis--for-buffer (current-buffer)
+             sis--for-buffer-locked))
+  (setq sis--for-buffer-locked t)
+  (sis--set-english)
+  (setq sis--respect-go-english t)
+
+  (unwind-protect (apply fn args)
+    (when sis-log-mode
+      (message "restore-advice: %s@%s, %s@locked"
+               sis--for-buffer (current-buffer)
+               sis--for-buffer-locked))
+    (setq sis--respect-go-english nil)
+    (setq sis--respect-force-restore t)))
+
 (defvar sis--prefix-override-map-enable nil
   "Enabe the override keymap.")
 
@@ -1069,6 +1097,10 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
          ;; Don't use :filter-return, advice may not run when trigger has error.
          (advice-add trigger :around #'sis--respect-restore-advice))
 
+       (dolist (trigger sis-respect-temp-english-commands)
+         ;; Don't use :filter-return, advice may not run when trigger has error.
+         (advice-add trigger :around #'sis--respect-temp-english-advice))
+
        ;; set english when prefix key pressed
        (setq sis--prefix-override-map-alist
              `((sis--prefix-override-map-enable
@@ -1111,6 +1143,9 @@ Possible values: \\='normal, \\='prefix, \\='sequence.")
 
     (dolist (trigger sis-respect-restore-triggers)
       (advice-remove trigger #'sis--respect-restore-advice))
+
+    (dolist (trigger sis-respect-temp-english-commands)
+      (advice-remove trigger #'sis--respect-temp-english-advice))
 
     ;; for prefix key
     (setq emulation-mode-map-alists
