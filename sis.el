@@ -116,7 +116,7 @@ Set after the modes may have no effect.")
 Set after the modes may have no effect.")
 
 (defvar sis-prefix-override-keys
-  (list "C-c" "C-x" "C-h")
+  (list "C-c" "C-x" "C-h" "C-r")
   "Prefix keys to be overrided.")
 
 (defvar sis-prefix-override-recap-triggers
